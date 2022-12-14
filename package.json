@@ -1,0 +1,42 @@
+{
+  "name": "react-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "wangtengyu",
+  "license": "MIT",
+  "scripts": {
+    "start": "craco start",
+    "build": "set GENERATE_SOURCEMAP=false && craco build"
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.0.0",
+    "@swc/helpers": "^0.4.14",
+    "autoprefixer": "^10.4.13",
+    "craco-swc": "^0.5.1",
+    "esbuild": "^0.16.5",
+    "esbuild-loader": "^2.20.0",
+    "postcss": "^8.4.19",
+    "react-scripts": "^5.0.1",
+    "speed-measure-webpack-plugin": "^1.5.0",
+    "tailwindcss": "^3.2.4"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.4",
+    "swr": "^2.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
