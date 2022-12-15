@@ -16,6 +16,20 @@ const Provider = props => {
     coordinates: {}
   })
   
+  React.useEffect(() => {
+    const coordinates = localStorage.getItem('coordinates')
+    if (coordinates) {
+      dispatch({ 
+        type: 'coordinates', 
+        payload: JSON.parse(coordinates)
+      });
+    }
+  }, [])
+
+  React.useEffect(() => {
+    localStorage.setItem('coordinates', JSON.stringify(state.coordinates))
+  }, [state.coordinates])
+
   return (
     <Context.Provider value={{ state, dispatch }}>
       {props.children}

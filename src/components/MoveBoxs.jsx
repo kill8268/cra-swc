@@ -46,7 +46,7 @@ function Boxs({children, className}) {
       style={{ transform: 'translate3d(0, 0, 0)'}} ref={root}>
         {coordinates &&
           list.map((item) => (
-            <MoveBox id={item.id} initXY={coordinates[item.id]}>
+            <MoveBox key={item.id} id={item.id} initXY={coordinates[item.id]}>
               {children(item)}
             </MoveBox>
           ))
