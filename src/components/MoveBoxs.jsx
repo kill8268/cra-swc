@@ -27,7 +27,7 @@ function Boxs({children, className}) {
     const y = clientY - offsetTop
     dispatch({ 
       type: 'list', 
-      payload: [...list.filter(item => item !== id), {id}]
+      payload: [...list.filter(item => item.id !== id), {id}]
     });
     dispatch({ 
       type: 'coordinates', 
