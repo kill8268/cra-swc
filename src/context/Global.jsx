@@ -1,7 +1,7 @@
-import React from 'react';
-const Context = React.createContext();
+import React from 'react'
 
-const Consumer = Context.Consumer;
+const Context = React.createContext()
+const Consumer = Context.Consumer
 
 function reducer(state, action) {
   return {
@@ -12,6 +12,8 @@ function reducer(state, action) {
 
 const Provider = props => {
   const [state, dispatch] = React.useReducer(reducer, {})
+
+  
   return (
     <Context.Provider value={{ state, dispatch }}>
       {props.children}
@@ -19,4 +21,4 @@ const Provider = props => {
   )
 };
 
-export { Context, Consumer, Provider };
+export { Context, Consumer, Provider }

@@ -3,6 +3,7 @@ const proxy = require('./proxy.config')
 const CracoSwcPlugin = require('craco-swc')
 const { ESBuildMinifyPlugin } = require('esbuild-loader')
 const smp = new (require('speed-measure-webpack-plugin'))()
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
   devServer: {
@@ -19,6 +20,7 @@ module.exports = {
     }
   ],
   webpack: smp.wrap({
+    plugins: [new BundleAnalyzerPlugin()],
     configure: (webpackConfig, { env, paths }) => {
       webpackConfig.optimization.minimizer = [
         new ESBuildMinifyPlugin({

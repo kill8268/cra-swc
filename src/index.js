@@ -4,12 +4,13 @@ import { RouterProvider } from "react-router-dom"
 import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from './context/Global'
 import router from './router'
+import theme from './theme'
 import './index.css'
 
 function App() {
   return (
     <Provider>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <RouterProvider router={router} />
       </ChakraProvider>
     </Provider>
