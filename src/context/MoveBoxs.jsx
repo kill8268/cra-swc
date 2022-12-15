@@ -4,6 +4,15 @@ const Context = React.createContext()
 const Consumer = Context.Consumer
 
 function reducer(state, action) {
+  if (action.type === 'coordinates') {
+    return {
+      ...state,
+      [action.type]: {
+        ...state[action.type],
+        ...action.payload
+      }
+    }
+  }
   return {
     ...state,
     [action.type]: action.payload

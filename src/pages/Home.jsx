@@ -8,7 +8,7 @@ export default function Home() {
     <Flex flex={1}>
       <MoveBoxs className="flex-1">
         {({id}) => (
-           <Card width={400}>
+          <Card width={400}>
            <CardBody>
              id:{id}
            </CardBody>

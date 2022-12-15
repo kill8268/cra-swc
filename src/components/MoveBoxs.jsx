@@ -32,7 +32,6 @@ function Boxs({children, className}) {
     dispatch({ 
       type: 'coordinates', 
       payload: {
-        ...coordinates,
         [id]: {x, y}
       }
     });
@@ -86,7 +85,6 @@ export function MoveBox({children, id}) {
     dispatch({
       type: 'coordinates', 
       payload: {
-        ...coordinates,
         [id]: { x, y }
       }
     })
@@ -117,8 +115,8 @@ export function MoveBox({children, id}) {
     onMouseDown={handleMoveStart} 
     onTouchStart={handleMoveStart}
     style={coordinates && { 
-      top: coordinates[id].y, 
-      left: coordinates[id].x, 
+      top: coordinates[id]?.y, 
+      left: coordinates[id]?.x, 
       zIndex: 999 
     }}>
       {children}
