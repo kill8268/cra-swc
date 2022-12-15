@@ -27,7 +27,7 @@ function Boxs({children, className}) {
     const y = clientY - offsetTop
     dispatch({ 
       type: 'list', 
-      payload: [...list, {id}]
+      payload: [...list.filter(item => item !== id), {id}]
     });
     dispatch({ 
       type: 'coordinates', 
@@ -46,7 +46,7 @@ function Boxs({children, className}) {
       style={{ transform: 'translate3d(0, 0, 0)'}} ref={root}>
         {coordinates &&
           list.map((item) => (
-            <MoveBox key={item.id} id={item.id} initXY={coordinates[item.id]}>
+            <MoveBox key={item.id} id={item.id}>
               {children(item)}
             </MoveBox>
           ))
@@ -55,8 +55,7 @@ function Boxs({children, className}) {
   )
 }
 
-export function MoveBox({children, id, initXY}) {
-  const [coordinate, setCoordinate] = React.useState(initXY)
+export function MoveBox({children, id}) {
 
   const {state: {coordinates}, dispatch} = React.useContext(Context)
 
@@ -65,8 +64,6 @@ export function MoveBox({children, id, initXY}) {
   const isDrag = React.useRef(false)
 
   const startXY = React.useRef({ x: 0, y: 0 })
-
-  React.useEffect(() => initXY && coordinate && setCoordinate(initXY), [initXY])
 
   React.useEffect(() => {
     return () => {
@@ -77,16 +74,6 @@ export function MoveBox({children, id, initXY}) {
     }
   }, [])
 
-  React.useEffect(() => {
-    dispatch({
-      type: 'coordinates', 
-      payload: {
-        ...coordinates,
-        [id]: coordinate
-      }
-    })
-  }, [coordinate])
-
   const handleMove = React.useCallback((e) => {
     if (!isDrag.current) return
     const { clientX, clientY } = (e.touches ? e.touches[0] : e)
@@ -96,7 +83,13 @@ export function MoveBox({children, id, initXY}) {
     y = y > window.innerHeight? window.innerHeight: y
     x = x < 0 ? 0 : x
     y = y < 0 ? 0 : y
-    setCoordinate({ x, y })
+    dispatch({
+      type: 'coordinates', 
+      payload: {
+        ...coordinates,
+        [id]: { x, y }
+      }
+    })
   }, [])
 
   const handleMoveEnd = React.useCallback(() => {
@@ -110,10 +103,6 @@ export function MoveBox({children, id, initXY}) {
     document.ontouchend = handleMoveEnd
     const { offsetLeft, offsetTop } = box.current
     const xy = e.touches ? e.touches[0] : e
-    console.info({
-      x: xy.clientX, y: xy.clientY,
-      left: offsetLeft, top: offsetTop
-    })
     startXY.current = {
       x: xy.clientX, y: xy.clientY,
       left: offsetLeft, top: offsetTop
@@ -127,9 +116,9 @@ export function MoveBox({children, id, initXY}) {
     className="fixed"
     onMouseDown={handleMoveStart} 
     onTouchStart={handleMoveStart}
-    style={coordinate && { 
-      top: coordinate.y, 
-      left: coordinate.x, 
+    style={coordinates && { 
+      top: coordinates[id].y, 
+      left: coordinates[id].x, 
       zIndex: 999 
     }}>
       {children}
