@@ -20,7 +20,7 @@ module.exports = {
     }
   ],
   webpack: smp.wrap({
-    plugins: [new BundleAnalyzerPlugin()],
+    // plugins: [new BundleAnalyzerPlugin()], // 打包分析
     configure: (webpackConfig, { env, paths }) => {
       webpackConfig.optimization.minimizer = [
         new ESBuildMinifyPlugin({

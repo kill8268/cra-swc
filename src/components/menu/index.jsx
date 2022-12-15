@@ -19,15 +19,15 @@ export default function Menu() {
       <TabPanel className='space-y-4'>
         <DataCard id="3" text="id: 3" />
         <DataCard id="4" text="id: 4" />
-        <DataCard />
-      </TabPanel>
-      <TabPanel className='space-y-4'>
         <DataCard id="5" text="id: 5" />
-        <DataCard id="6" text="id: 6" />
       </TabPanel>
       <TabPanel className='space-y-4'>
+        <DataCard id="6" text="id: 6" />
         <DataCard id="7" text="id: 7" />
+      </TabPanel>
+      <TabPanel className='space-y-4'>
         <DataCard id="8" text="id: 8" />
+        <DataCard id="9" text="id: 9" />
       </TabPanel>
     </TabPanels>
   </Tabs>

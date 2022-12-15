@@ -1,17 +1,41 @@
 import React from 'react'
+import { Provider, Context } from '../context/MoveBoxs'
 
-export function MoveBoxs({children, className, onAddElement}) {
+export function MoveBoxs(props) {
+  return (
+    <Provider>
+      <Boxs {...props}  />
+    </Provider>
+  )
+}
+
+function Boxs({children, className}) {
   const root = React.useRef(null) 
+
+  const {state: {list, coordinates}, dispatch} = React.useContext(Context)
 
   const handleDrop = (e) => {
     e.preventDefault();
+    document.onmousemove = () => { }
+    document.ontouchmove = () => { }
+    document.onmouseup = () => { }
+    document.ontouchend = () => { }
     const { clientX, clientY } = (e.touches ? e.touches[0] : e)
     const id = e.dataTransfer.getData('text/plain')
     const {offsetLeft, offsetTop} = root.current
-    onAddElement && onAddElement({
-      id, 
-      x: clientX - offsetLeft, 
-      y: clientY - offsetTop})
+    const x = clientX - offsetLeft
+    const y = clientY - offsetTop
+    dispatch({ 
+      type: 'list', 
+      payload: [...list, {id}]
+    });
+    dispatch({ 
+      type: 'coordinates', 
+      payload: {
+        ...coordinates,
+        [id]: {x, y}
+      }
+    });
   }
 
   return (
@@ -20,14 +44,21 @@ export function MoveBoxs({children, className, onAddElement}) {
       onDrop={handleDrop}
       className={`overflow-hidden ${className}`}
       style={{ transform: 'translate3d(0, 0, 0)'}} ref={root}>
-      {React.Children.map(children, 
-        (child) => React.cloneElement(child))}
+        {coordinates &&
+          list.map((item) => (
+            <MoveBox id={item.id} initXY={coordinates[item.id]}>
+              {children(item)}
+            </MoveBox>
+          ))
+        }
     </div>
   )
 }
 
-export function MoveBox({children, initXY}) {
-  const [coordinate, setCoordinate] = React.useState(null)
+export function MoveBox({children, id, initXY}) {
+  const [coordinate, setCoordinate] = React.useState(initXY)
+
+  const {state: {coordinates}, dispatch} = React.useContext(Context)
 
   const box = React.useRef(null)
 
@@ -35,7 +66,7 @@ export function MoveBox({children, initXY}) {
 
   const startXY = React.useRef({ x: 0, y: 0 })
 
-  React.useEffect(() => initXY && setCoordinate(initXY), [initXY])
+  React.useEffect(() => initXY && coordinate && setCoordinate(initXY), [initXY])
 
   React.useEffect(() => {
     return () => {
@@ -45,6 +76,16 @@ export function MoveBox({children, initXY}) {
       document.ontouchend = () => { }
     }
   }, [])
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'coordinates', 
+      payload: {
+        ...coordinates,
+        [id]: coordinate
+      }
+    })
+  }, [coordinate])
 
   const handleMove = React.useCallback((e) => {
     if (!isDrag.current) return
@@ -84,8 +125,13 @@ export function MoveBox({children, initXY}) {
     <div 
     ref={box}
     className="fixed"
-    style={coordinate && { top: coordinate.y, left: coordinate.x, zIndex: 999 }}
-    onMouseDown={handleMoveStart} onTouchStart={handleMoveStart}>
+    onMouseDown={handleMoveStart} 
+    onTouchStart={handleMoveStart}
+    style={coordinate && { 
+      top: coordinate.y, 
+      left: coordinate.x, 
+      zIndex: 999 
+    }}>
       {children}
     </div>
   )
