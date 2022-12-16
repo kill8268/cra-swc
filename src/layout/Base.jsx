@@ -17,7 +17,7 @@ export default function Base() {
         </Box>
         <Menu />
       </Box>
-      <Flex flex={2} px={4} py={4}>
+      <Flex flex={2}>
         <Outlet />
       </Flex>
     </Flex >
