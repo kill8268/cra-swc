@@ -9,9 +9,7 @@ const DataCard = ({ id, onClose }) => {
 
   const { isOpen, onToggle } = useDisclosure()
 
-  const { isOpen: isShow , onToggle: onShowToggle } = useDisclosure({
-    isOpen: true
-  })
+  const { isOpen: isShow , onToggle: onShowToggle } = useDisclosure()
 
   React.useEffect(() => {
     onShowToggle()
@@ -20,7 +18,7 @@ const DataCard = ({ id, onClose }) => {
     }, 100)
   }, [])
 
-  const handleDoubleClick = () => {
+  const handleClose = () => {
     onShowToggle()
     setTimeout(() => {
       onClose && onClose()
@@ -32,10 +30,10 @@ const DataCard = ({ id, onClose }) => {
       <Card width={400}>
         <CardHeader
           className={isOpen ? 'border-b' : ''}
-          onDoubleClick={handleDoubleClick}>
+          onDoubleClick={onToggle}>
           <Flex justifyContent="space-between" alignItems="center">
             <Box>id:{id}</Box>
-            <CloseButton onClick={handleDoubleClick} />
+            <CloseButton onClick={handleClose} />
           </Flex>
         </CardHeader>
         <Collapse in={isOpen} animateOpacity>
