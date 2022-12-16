@@ -47,7 +47,6 @@ export default function Sign() {
     console.info(width)
   },[width])
 
-
   return (
     <Flex height="100%">
       <Box flex={1} bg='whiteAlpha.100'>
