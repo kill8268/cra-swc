@@ -1,6 +1,7 @@
 import {createBrowserRouter} from 'react-router-dom'
 import Home from '../pages/Home'
 import BaseLayout from '../layout/Base'
+import SignLayout from '../layout/Sign'
 
 export default createBrowserRouter([
   {
@@ -9,6 +10,10 @@ export default createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
     ]
+  },
+  {
+    path: '/login',
+    element: <SignLayout />,
   }
 ])
 
