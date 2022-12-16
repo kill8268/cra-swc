@@ -6,6 +6,8 @@ export default function Sign() {
 
   const [bgColor, setBgColor] = React.useState('')
 
+  const [style, setStyle] = React.useState({})
+
   const colorList = [
     'whiteAlpha.500',
     'gray.500',
@@ -19,12 +21,18 @@ export default function Sign() {
   ]
 
   React.useEffect(() => {
-    const timer = setInterval(() => {
+    const timer1 = setInterval(() => {
       const index = Math.floor(Math.random() * colorList.length)
       setBgColor(colorList[index])
+    }, 70)
+    
+    const timer2 = setInterval(() => {
+      setStyle({transform: `translate3d(${Math.random() * 100}%, ${Math.random() * 100}%, 0)`})
     }, 50)
+
     return () => {
-      clearInterval(timer)
+      clearInterval(timer1)
+      clearInterval(timer2)
     }
   }, [])
 
@@ -34,8 +42,9 @@ export default function Sign() {
       <Box flex={1} bg='whiteAlpha.100'>
         <Outlet />
       </Box>
-      <Flex bg={bgColor} flex={2} justifyContent="center" alignItems="center">
-        <Image w={300} src="./static/images/bg-icon.png" />
+      <Flex className="overflow-hidden" style={{transform: 'translate3d(0, 0, 0)'}} bg={bgColor} flex={2} justifyContent="center" alignItems="center">
+        <Image style={style} w={300} 
+          src="./static/images/bg-icon.png" />
       </Flex>
     </Flex >
   );
