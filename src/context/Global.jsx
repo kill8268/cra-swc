@@ -11,7 +11,16 @@ function reducer(state, action) {
 }
 
 const Provider = props => {
-  const [state, dispatch] = React.useReducer(reducer, {})
+  const [state, dispatch] = React.useReducer(reducer, {
+    location: null,
+  })
+
+  React.useEffect(() => {
+    navigator.geolocation.getCurrentPosition(({coords}) => {
+      const {latitude, longitude} = coords
+      dispatch({ type: 'location', payload: {latitude, longitude}})
+    }) 
+  }, [])
 
   
   return (

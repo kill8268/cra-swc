@@ -5,5 +5,9 @@ module.exports = {
   },
   '/static': {
     index: './public/static',
+  },
+  '/v1': {
+    target: 'http://api.weatherapi.com',
+    changeOrigin: true
   }
 };
