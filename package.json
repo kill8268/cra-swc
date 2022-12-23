@@ -7,6 +7,7 @@
   "scripts": {
     "start": "craco start .env .env.development .env.supabase",
     "build": "craco build .env .env.production .env.supabase",
+    "netlify": "npm install && craco build .env .env.production",
     "supbase:init": "node scripts/supbaseInit.js"
   },
   "devDependencies": {
