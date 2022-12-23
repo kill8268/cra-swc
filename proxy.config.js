@@ -1,6 +1,10 @@
 module.exports = {
   '/api': {
-    target: '',
+    target: 'http://localhost:9100',
+    changeOrigin: true
+  },
+  '/json': {
+    target: 'https://nas.wangyuxin.tech:9211',
     changeOrigin: true
   },
   '/static': {

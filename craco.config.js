@@ -1,4 +1,5 @@
 const path = require('path')
+
 const proxy = require('./proxy.config')
 const CracoSwcPlugin = require('craco-swc')
 const { ESBuildMinifyPlugin } = require('esbuild-loader')
@@ -22,6 +23,9 @@ module.exports = {
   webpack: smp.wrap({
     // plugins: [new BundleAnalyzerPlugin()], // 打包分析
     configure: (webpackConfig, { env, paths }) => {
+      if (process.env.GENERATE_SOURCEMAP === 'false') {
+        webpackConfig.devtool = false
+      } 
       webpackConfig.optimization.minimizer = [
         new ESBuildMinifyPlugin({
           target: 'es2015',

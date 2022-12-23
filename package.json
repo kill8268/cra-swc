@@ -5,8 +5,9 @@
   "author": "wangtengyu",
   "license": "MIT",
   "scripts": {
-    "start": "craco start",
-    "build": "set GENERATE_SOURCEMAP=false && craco build"
+    "start": "craco start .env .env.development .env.supabase",
+    "build": "craco build .env .env.production .env.supabase",
+    "supbase:init": "node scripts/supbaseInit.js"
   },
   "devDependencies": {
     "@craco/craco": "^7.0.0",
@@ -22,15 +23,17 @@
     "webpack-bundle-analyzer": "^4.7.0"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.14",
     "@chakra-ui/react": "^2.4.3",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@supabase/supabase-js": "^2.2.2",
     "dayjs": "^1.11.6",
-    "formik": "^2.2.9",
     "framer-motion": "^7.8.0",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.41.0",
     "react-router-dom": "^6.4.4",
     "swr": "^2.0.0"
   },

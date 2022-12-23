@@ -1,12 +1,13 @@
 
 import React from "react";
 import { Outlet } from 'react-router-dom'
-import { Flex, Box, Heading, Image, Text } from '@chakra-ui/react'
+import { Flex, Box, Heading, Text } from '@chakra-ui/react'
 import useNowTime from '../hooks/useNowTime'
 import Menu from '../components/menu'
 import useCity from "../hooks/api/useCity";
 import useWeatherAndLoc from '../hooks/api/useWeatherAndLoc'
 import useWeatherName from "../hooks/api/useWeatherName";
+import AffixBtn from "../components/AffixBtn";
 
 export default function Base() {
 
@@ -46,6 +47,7 @@ export default function Base() {
       <Flex flex={2}>
         <Outlet />
       </Flex>
+      <AffixBtn />
     </Flex >
   );
 }

@@ -6,27 +6,36 @@ export default function useFileUploader() {
 
   const [isLoading, setIsLoading] = React.useState(false)
 
-  const [error, setError] = React.useState(null)
+  const clear = () => setProgress(0)
 
-  const uploader = (file, params) => {
-    setProgress(0)
-    setError(null)
-    const xhr = new XMLHttpRequest()
-    const formData = new FormData()
-    formData.append('file', file)
-    if (params) {
-      Object.keys(params).forEach(key => {
-        formData.append(key, params[key])
-      })
-    }
-    xhr.upload.onprogress = (e) => setProgress(Math.round(e.loaded / e.total * 100))
-    xhr.upload.onloadstart = () => setIsLoading(true)
-    xhr.upload.onloadend = () => setIsLoading(false)
-    xhr.upload.onerror = (e) => setError(e)
-    xhr.open('POST', '/api/upload')
-    xhr.send(formData)
+  const uploader = (url, file, formFileKey, params) => {
+    setIsLoading(true)
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      const formData = new FormData()
+      formData.append(formFileKey || 'file', file)
+      if (params) {
+        Object.keys(params).forEach(key => {
+          formData.append(key, params[key])
+        })
+      }
+      xhr.upload.onprogress = (e) => setProgress(Math.round(e.loaded / e.total * 100))
+      xhr.upload.onerror = reject
+      xhr.upload.onabort = reject
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          setIsLoading(false)
+          if (xhr.status === 200) {
+            resolve(JSON.parse(xhr.response))
+          } else {
+            reject(xhr)
+          }
+        }
+      }
+      xhr.open('POST', url)
+      xhr.send(formData)
+    })
   }
 
-  return [uploader, progress, isLoading, error]
-
+  return [uploader, clear, progress, isLoading]
 }

@@ -1,6 +1,6 @@
 import React from 'react'
+import Upload from '../components/Upload'
 import { MoveBoxs } from '../components/MoveBoxs'
-import { Field, Form, Formik } from 'formik'
 import {
   Flex, Card, CardBody, CardHeader, Box, CloseButton, Button,
   Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay,
@@ -68,34 +68,20 @@ export default function Home() {
       <MoveBoxs className="flex-1 px-4 py-4">
         {(item, onRemove) => <DataCard {...item} onClose={onRemove} />}
       </MoveBoxs>
-      <Button onClick={onOpen}>新增</Button>
       <Drawer onClose={onClose} isOpen={isOpen} placement="right">
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>新增计划</DrawerHeader>
           <DrawerBody>
-            <Formik onSubmit={handleSubmit}>
-              <Form>
-                <Field name='title'>
-                  {({ field, form }) => (
-                    <FormControl>
-                      <FormLabel>计划标题</FormLabel>
-                      <Input {...field} placeholder='请输入计划标题' />
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name='datetime'>
-                  {({ field, form }) => (
-                    <FormControl>
-                      <FormLabel>计划开始时间</FormLabel>
-                      <Input {...field} placeholder="请选择计划开始时间"
-                        type="datetime-local" />
-                    </FormControl>
-                  )}
-                </Field>
-              </Form>
-            </Formik>
+            <FormControl name="file">
+              <FormLabel>附件</FormLabel>
+              <Upload url="/api/file">
+                {(onSelectFile) =>
+                  <Button onClick={onSelectFile}>上传文件</Button>
+                }
+              </Upload>
+            </FormControl>
           </DrawerBody>
           <DrawerFooter>
             <Button variant='outline' mr={3} onClick={onClose}>
