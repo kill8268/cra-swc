@@ -134,7 +134,7 @@ const theme = extendTheme({
       'body': {
         background: 'url(https://rare-gallery.com/mocahbig/442196-anime-girls-window-computer-night-Serial-Experiments-Lain.png) no-repeat',
         backgroundSize: 'cover',
-      }
+      },
     }
   },
 })

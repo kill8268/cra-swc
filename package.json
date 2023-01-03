@@ -5,8 +5,8 @@
   "author": "wangtengyu",
   "license": "MIT",
   "scripts": {
-    "start": "craco start .env .env.development .env.supabase",
-    "build": "craco build .env .env.production .env.supabase",
+    "start": "craco start",
+    "build": "craco build",
     "netlify": "npm install && craco build .env .env.production",
     "supbase:init": "node scripts/supbaseInit.js"
   },
@@ -29,6 +29,7 @@
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@supabase/supabase-js": "^2.2.2",
+    "blueimp-md5": "^2.19.0",
     "dayjs": "^1.11.6",
     "framer-motion": "^7.8.0",
     "lodash": "^4.17.21",
@@ -36,7 +37,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.41.0",
     "react-router-dom": "^6.4.4",
-    "swr": "^2.0.0"
+    "swr": "^2.0.0",
+    "zustand": "^4.2.0"
   },
   "browserslist": {
     "production": [

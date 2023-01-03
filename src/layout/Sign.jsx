@@ -43,19 +43,16 @@ export default function Sign() {
     }
   }, [])
 
-  React.useEffect(() => {
-    console.info(width)
-  },[width])
-
   return (
     <Flex height="100%">
-      <Box flex={1} bg='whiteAlpha.100'>
+      <Flex flex={1} className="bg-blur" justifyContent="center" alignItems="center">
         <Outlet />
-      </Box>
-      <Flex className="overflow-hidden" style={{transform: 'translate3d(0, 0, 0)'}} bg={bgColor} flex={2} justifyContent="center" alignItems="center">
+      </Flex>
+      <Box flex={2} />
+      {/* <Flex className="overflow-hidden" style={{transform: 'translate3d(0, 0, 0)'}} bg={bgColor} flex={2} justifyContent="center" alignItems="center">
         <Image style={style} w={width} 
           src="./static/images/bg-icon.png" />
-      </Flex>
-    </Flex >
+      </Flex> */}
+    </Flex>
   );
 }

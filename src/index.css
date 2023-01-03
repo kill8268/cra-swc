@@ -11,3 +11,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.bg-blur {
+  backdrop-filter: blur(5px);
+}      

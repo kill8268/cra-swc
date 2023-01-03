@@ -1,5 +1,5 @@
-
 import React from "react";
+import useUserStore from "../store/useUserStore";
 import { Outlet } from 'react-router-dom'
 import { Flex, Box, Heading, Text } from '@chakra-ui/react'
 import useNowTime from '../hooks/useNowTime'
@@ -22,6 +22,15 @@ export default function Base() {
   const [weatherName] = useWeatherName()
 
   const [city] = useCity()
+  
+  const { isLogin } = useUserStore()
+
+  React.useEffect(() => {
+    if (!isLogin) return 
+    if (!isLogin()) {
+      window.location.href = '/sign-in'
+    }
+  }, [isLogin])
 
   React.useEffect(() => {
     if (city && locationAndWeather && weatherName) {
@@ -32,7 +41,7 @@ export default function Base() {
 
   return (
     <Flex height="100%">
-      <Box flex={1} bg='whiteAlpha.100'>
+      <Box flex={1} className="bg-blur">
         <Box px={4} py={4}>
           <Flex justifyContent="space-between">
             <Heading>欢迎！</Heading>
