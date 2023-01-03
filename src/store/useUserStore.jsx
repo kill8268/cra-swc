@@ -4,8 +4,7 @@ const isExpires = () => {
   const token = localStorage.getItem("token");
   if (!token) return true;
   const { expires_at, expires_in } = JSON.parse(token);
-  console.log(Date.now(), expires_at * 1000 + expires_in);
-  return Date.now() >= expires_at * 1000 + expires_in;
+  return Date.now() >= expires_at * 1000 + expires_in * 1000;
 }
 
 export default create((set, get) => ({
