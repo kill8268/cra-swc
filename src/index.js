@@ -5,8 +5,8 @@ import { createRoot } from "react-dom/client"
 import { RouterProvider } from "react-router-dom"
 import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from './context/Global'
-import router from './router'
-import theme from './theme'
+import router from './config/router'
+import theme from './config/theme'
 import './index.css'
 
 function App() {

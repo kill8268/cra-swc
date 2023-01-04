@@ -1,6 +1,6 @@
 import React from 'react'
-import Upload from '../components/Upload'
-import { MoveBoxs } from '../components/MoveBoxs'
+import Upload from '@components/Upload'
+import { MoveBoxs } from '@components/MoveBoxs'
 import {
   Flex, Card, CardBody, CardHeader, Box, CloseButton, Button,
   Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay,
@@ -61,7 +61,6 @@ export default function Home() {
 
     actions.setSubmitting(false)
   }
-
 
   return (
     <Flex flex={1} direction="column">

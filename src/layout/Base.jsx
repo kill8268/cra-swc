@@ -1,13 +1,13 @@
 import React from "react";
-import useUserStore from "../store/useUserStore";
 import { Outlet } from 'react-router-dom'
 import { Flex, Box, Heading, Text } from '@chakra-ui/react'
-import useNowTime from '../hooks/useNowTime'
-import Menu from '../components/menu'
-import useCity from "../hooks/api/useCity";
-import useWeatherAndLoc from '../hooks/api/useWeatherAndLoc'
-import useWeatherName from "../hooks/api/useWeatherName";
-import AffixBtn from "../components/AffixBtn";
+import useNowTime from '@hooks/useNowTime'
+import useCity from "@hooks/api/useCity";
+import useWeatherAndLoc from '@hooks/api/useWeatherAndLoc';
+import useWeatherName from "@hooks/api/useWeatherName";
+import useUserStore from "@hooks/store/useUserStore";
+import AffixBtn from "@components/AffixBtn";
+import Menu from '@components/menu';
 
 export default function Base() {
 

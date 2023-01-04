@@ -1,5 +1,5 @@
 import React from 'react'
-import useFileUploader from '../hooks/api/useFileUploader'
+import useFileUploader from '@hooks/api/useFileUploader'
 import { Progress, Spinner, Text } from '@chakra-ui/react'
 import { CheckCircleIcon, WarningIcon } from '@chakra-ui/icons'
 

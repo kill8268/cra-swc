@@ -1,9 +1,9 @@
 import React from 'react'
 import md5 from 'blueimp-md5'
-import supbase from '../lib/supbase'
-import useUserStore from '../store/useUserStore'
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
+import supbase from '@lib/supbase'
+import useUserStore from '@hooks/store/useUserStore'
 import { useToast, FormControl, FormLabel, Input, Button, Box } from '@chakra-ui/react'
 
 export default function SignIn() {

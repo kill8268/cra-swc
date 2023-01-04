@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import { Box, IconButton } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 

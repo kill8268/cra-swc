@@ -21,7 +21,17 @@ module.exports = {
     }
   ],
   webpack: smp.wrap({
-    // plugins: [new BundleAnalyzerPlugin()], // 打包分析
+    plugins: [new BundleAnalyzerPlugin()], // 打包分析
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@layout': path.resolve(__dirname, 'src/layout'),
+      '@lib': path.resolve(__dirname, 'src/lib'),
+      '@config': path.resolve(__dirname, 'src/config'),
+      '@context': path.resolve(__dirname, 'src/context'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
+    },
     configure: (webpackConfig, { env, paths }) => {
       if (process.env.GENERATE_SOURCEMAP === 'false') {
         webpackConfig.devtool = false

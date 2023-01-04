@@ -1,5 +1,5 @@
 import React from 'react'
-import { Provider, Context } from '../context/MoveBoxs'
+import { Provider, Context } from '@context/MoveBoxs'
 
 export function MoveBoxs(props) {
   return (

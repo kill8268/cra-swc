@@ -1,6 +1,6 @@
 import React from 'react'
 import md5 from 'blueimp-md5'
-import supbase from '../lib/supbase'
+import supbase from '@lib/supbase'
 import { useForm } from "react-hook-form"
 import { useToast, FormControl, FormLabel, FormErrorMessage, Input, Button } from '@chakra-ui/react'
 
