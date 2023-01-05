@@ -131,10 +131,10 @@ const theme = extendTheme({
   config,
   styles: {
     global: {
-      'body': {
-        background: 'url(https://rare-gallery.com/mocahbig/442196-anime-girls-window-computer-night-Serial-Experiments-Lain.png) no-repeat',
-        backgroundSize: 'cover',
-      },
+      // 'body': {
+      //   background: 'url(https://rare-gallery.com/mocahbig/442196-anime-girls-window-computer-night-Serial-Experiments-Lain.png) no-repeat',
+      //   backgroundSize: 'cover',
+      // },
     }
   },
 })

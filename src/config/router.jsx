@@ -4,7 +4,7 @@ import SignLayout from '@layout/Sign'
 import Home from '@pages/Home'
 import SignIn from '@pages/SignIn'
 import SignUp from '@pages/SignUp'
-import Test from '@pages/Test'
+import Test from '@pages/test'
 
 export default createBrowserRouter([
   {

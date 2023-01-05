@@ -9,9 +9,7 @@ export default function useNowTime({format = 'YYYY年MM月DD日 HH:mm'}) {
       setNowTime(new Date())
     }, 1000)
 
-    return () => {
-      clearInterval(timer)
-    }
+    return () => clearInterval(timer)
   }, [])
 
   return dayjs(nowTime).format(format)

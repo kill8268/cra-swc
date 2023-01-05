@@ -15,13 +15,10 @@ const Provider = props => {
     location: null,
   })
 
-  React.useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({coords}) => {
-      const {latitude, longitude} = coords
-      dispatch({ type: 'location', payload: {latitude, longitude}})
-    }) 
-  }, [])
-
+  navigator.geolocation.getCurrentPosition(({coords}) => {
+    const {latitude, longitude} = coords
+    dispatch({ type: 'location', payload: {latitude, longitude}})
+  })
   
   return (
     <Context.Provider value={{ state, dispatch }}>

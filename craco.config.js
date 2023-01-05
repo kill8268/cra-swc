@@ -1,9 +1,8 @@
 const path = require('path')
-
 const proxy = require('./proxy.config')
+const WebpackBar = require('webpackbar')
 const CracoSwcPlugin = require('craco-swc')
 const { ESBuildMinifyPlugin } = require('esbuild-loader')
-const smp = new (require('speed-measure-webpack-plugin'))()
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 module.exports = {
@@ -20,8 +19,11 @@ module.exports = {
       }
     }
   ],
-  webpack: smp.wrap({
-    plugins: [new BundleAnalyzerPlugin()], // 打包分析
+  webpack: {
+    plugins: [
+      new WebpackBar(),
+      // new BundleAnalyzerPlugin() // 打包分析
+    ],
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@components': path.resolve(__dirname, 'src/components'),
@@ -45,5 +47,5 @@ module.exports = {
       ]
       return webpackConfig
     }
-  })
+  }
 };

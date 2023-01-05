@@ -11,10 +11,6 @@ import Menu from '@components/menu';
 
 export default function Base() {
 
-  const [cityName, setCityName] = React.useState('-')
-
-  const [weatherCName, setWeatherCName] = React.useState('-')
-
   const nowTime = useNowTime({ format: 'YYYY年MM月DD日 HH时mm分' })
 
   const [locationAndWeather] = useWeatherAndLoc()
@@ -24,20 +20,21 @@ export default function Base() {
   const [city] = useCity()
   
   const { isLogin } = useUserStore()
+  
+  !isLogin() && (window.location.href = '/sign-in')
 
-  React.useEffect(() => {
-    if (!isLogin) return 
-    if (!isLogin()) {
-      window.location.href = '/sign-in'
-    }
-  }, [isLogin])
-
-  React.useEffect(() => {
+  const { cityName, weatherCName } = React.useMemo(() => {
     if (city && locationAndWeather && weatherName) {
-      setCityName(city[locationAndWeather.location.name] || '-')
-      setWeatherCName(weatherName[locationAndWeather.current.condition.text])
+      return {
+        cityName: city[locationAndWeather.location.name] || '-',
+        weatherCName: weatherName[locationAndWeather.current.condition.text]
+      }
     }
-  }, [city, locationAndWeather])
+    return {
+      cityName: '-',
+      weatherCName: '-'
+    }
+  }, [city, locationAndWeather, weatherName])
 
   return (
     <Flex height="100%">
