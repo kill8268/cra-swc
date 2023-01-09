@@ -31,7 +31,7 @@ module.exports = {
       '@layout': path.resolve(__dirname, 'src/layout'),
       '@lib': path.resolve(__dirname, 'src/lib'),
       '@config': path.resolve(__dirname, 'src/config'),
-      '@context': path.resolve(__dirname, 'src/context'),
+      '@providers': path.resolve(__dirname, 'src/providers'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
     },
     configure: (webpackConfig, { env, paths }) => {

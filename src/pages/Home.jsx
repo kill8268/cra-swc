@@ -18,9 +18,8 @@ const DataCard = ({ id, onClose }) => {
 
   React.useEffect(() => {
     onShowToggle()
-    setTimeout(() => {
-      onToggle()
-    }, 100)
+    const id = setTimeout(() => onToggle(), 100)
+    return () => clearTimeout(id)
   }, [])
 
   const handleClose = () => {

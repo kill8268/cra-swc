@@ -1,5 +1,5 @@
 import React from 'react'
-import { Provider, Context } from '@context/MoveBoxs'
+import { Provider, Context } from '@/providers/MoveBoxs'
 
 export function MoveBoxs(props) {
   return (
@@ -75,16 +75,7 @@ function MoveBox({ children, id }) {
 
   const startXY = React.useRef({ x: 0, y: 0 })
 
-  React.useEffect(() => {
-    return () => {
-      document.onmousemove = () => { }
-      document.ontouchmove = () => { }
-      document.onmouseup = () => { }
-      document.ontouchend = () => { }
-    }
-  }, [])
-
-  const handleMove = React.useCallback((e) => {
+  const handleMove = (e) => {
     if (!isDrag.current) return
     const { clientX, clientY } = (e.touches ? e.touches[0] : e)
     let x = clientX - (startXY.current.x - startXY.current.left)
@@ -99,11 +90,15 @@ function MoveBox({ children, id }) {
         [id]: { x, y }
       }
     })
-  }, [])
+  }
 
-  const handleMoveEnd = React.useCallback(() => {
+  const handleMoveEnd = () => {
     isDrag.current = false
-  }, [])
+    document.onmousemove = () => { }
+    document.ontouchmove = () => { }
+    document.onmouseup = () => { }
+    document.ontouchend = () => { }
+  }
 
   const handleMoveStart = (e) => {
     document.onmousemove = handleMove

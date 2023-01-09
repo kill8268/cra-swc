@@ -27,21 +27,20 @@ function reducer(state, action) {
   }
 }
 
+const getCoordinates = () => {
+  const coordinates = localStorage.getItem('coordinates')
+  if (coordinates) {
+    return JSON.parse(coordinates)
+  }else{
+    return {}
+  }
+}
+
 const Provider = props => {
   const [state, dispatch] = React.useReducer(reducer, {
     list: [],
-    coordinates: {}
+    coordinates: getCoordinates()
   })
-  
-  React.useEffect(() => {
-    const coordinates = localStorage.getItem('coordinates')
-    if (coordinates) {
-      dispatch({ 
-        type: 'coordinates', 
-        payload: JSON.parse(coordinates)
-      });
-    }
-  }, [])
 
   React.useEffect(() => {
     localStorage.setItem('coordinates', JSON.stringify(state.coordinates))

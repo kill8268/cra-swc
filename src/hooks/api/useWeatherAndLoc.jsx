@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import React from 'react'
 import useFetcher from './useFetcher'
-import {Context} from '@context/Global'
+import {Context} from '@/providers/Global'
 
 export default function useCity() {
   const {state: {location}} = React.useContext(Context)

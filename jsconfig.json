@@ -8,7 +8,7 @@
       "@layout/*": ["src/layout/*"],
       "@lib/*": ["src/lib/*"],
       "@config/*": ["src/config/*"],
-      "@context/*": ["src/context/*"],
+      "@providers/*": ["src/providers/*"],
       "@hooks/*": ["src/hooks/*"]
     }
   }
