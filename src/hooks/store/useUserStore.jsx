@@ -1,4 +1,6 @@
 import create from "zustand";
+import md5 from 'blueimp-md5';
+import supbase from '@lib/supbase';
 
 const isExpires = () => {
   const token = localStorage.getItem("token");
@@ -32,10 +34,26 @@ export default create((set, get) => ({
     const token = localStorage.getItem("token");
     return user && token && !isExpires();
   },
-  login: (user, token) => {
+  login: async (data) => {
+    const { data: { user, session }, error } = await supbase.auth.signInWithPassword({
+      ...data,
+      password: md5(data.password, process.env.REACT_APP_KEY)
+    })
+    const token = {
+      ...session,
+      user: undefined
+    }
     localStorage.setItem("user", JSON.stringify(user));
     localStorage.setItem("token", JSON.stringify(token));
     set({ user, token });
+    return {error};
+  },
+  siginUp: async (data) => {
+    const { error } =  await supbase.auth.signUp({
+      ...data,
+      password: md5(data.password, process.env.REACT_APP_KEY)
+    })
+    return {error}
   },
   logout: () => {
     localStorage.removeItem("user");

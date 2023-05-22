@@ -1,6 +1,7 @@
 import React from 'react'
 import Upload from '@components/Upload'
 import { MoveBoxs } from '@components/MoveBoxs'
+import useTaskList from '@hooks/api/useTaskList'
 import {
   Flex, Card, CardBody, CardHeader, Box, CloseButton, Button,
   Drawer, DrawerBody, DrawerFooter, DrawerHeader, DrawerOverlay,
@@ -53,6 +54,8 @@ const DataCard = ({ id, onClose }) => {
 
 
 export default function Home() {
+
+  const [data, error, isLoading] = useTaskList()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 

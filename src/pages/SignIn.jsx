@@ -1,8 +1,6 @@
 import React from 'react'
-import md5 from 'blueimp-md5'
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form"
-import supbase from '@lib/supbase'
 import useUserStore from '@hooks/store/useUserStore'
 import { useToast, FormControl, FormLabel, Input, Button, Box } from '@chakra-ui/react'
 
@@ -23,10 +21,7 @@ export default function SignIn() {
 
   const onSubmit = async data => {
     setIsLoading(true)
-    const { data: { user, session }, error } = await supbase.auth.signInWithPassword({
-      ...data,
-      password: md5(data.password, process.env.REACT_APP_KEY)
-    })
+    const {error} = await login(data)
     if (error) {
       toast({
         title: 'Error',
@@ -38,10 +33,6 @@ export default function SignIn() {
       setIsLoading(false)
       return
     }
-    login(user, {
-      ...session,
-      user: undefined
-    })
     window.location.href = '/'
   }
 
